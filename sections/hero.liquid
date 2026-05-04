@@ -459,6 +459,7 @@
     --hero-border-opacity: {{ section.settings.border_opacity }}%;
     --blur-opacity: {{ section.settings.reflection_opacity | divided_by: 100.0 }};
     --hero-image-fit: {{ section.settings.image_fit }};
+    --hero-background-color: {{ section.settings.background_color }};
     {% if section.settings.section_height == 'custom' %}
       --hero-min-height: {{ section.settings.section_height_custom }}svh;
     {% elsif section.settings.section_height == "full-screen" %}
@@ -553,6 +554,7 @@
   .hero {
     position: relative;
     min-height: calc(var(--hero-min-height) - var(--hero-height-offset));
+    background-color: var(--hero-background-color);
   }
 
   .hero[data-shopify-visual-preview] {
@@ -595,6 +597,9 @@
     display: grid;
     grid-column: 1 / -1;
     grid-template-columns: repeat(var(--hero-media-count, 1), 1fr);
+    justify-items: center;
+    align-items: center;
+    padding: 0 12.5%;
   }
 
   .hero--auto .hero__media {
@@ -616,6 +621,8 @@
   .hero__media-wrapper {
     overflow: hidden;
     position: relative;
+    max-width: 75%;
+    width: 100%;
   }
 
   .hero__media {
@@ -1261,6 +1268,12 @@
       ],
       "default": "cover",
       "info": "t:info.image_fit_description"
+    },
+    {
+      "type": "color",
+      "id": "background_color",
+      "label": "t:settings.background_color",
+      "default": "#000000"
     }
   ],
   "presets": [
