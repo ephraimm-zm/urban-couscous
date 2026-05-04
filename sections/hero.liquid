@@ -458,6 +458,7 @@
     --hero-border-width: {{ section.settings.border_width }}px;
     --hero-border-opacity: {{ section.settings.border_opacity }}%;
     --blur-opacity: {{ section.settings.reflection_opacity | divided_by: 100.0 }};
+    --hero-image-fit: {{ section.settings.image_fit }};
     {% if section.settings.section_height == 'custom' %}
       --hero-min-height: {{ section.settings.section_height_custom }}svh;
     {% elsif section.settings.section_height == "full-screen" %}
@@ -620,7 +621,7 @@
   .hero__media {
     height: 100%;
     width: 100%;
-    object-fit: cover;
+    object-fit: var(--hero-image-fit);
     object-position: center center;
     overflow: hidden;
     position: relative;
@@ -728,7 +729,7 @@
     inset: 0;
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: var(--hero-image-fit);
     object-position: center center;
     filter: var(--blurred-reflection-filter-blur);
     opacity: var(--blur-opacity);
@@ -1238,6 +1239,27 @@
       "step": 1,
       "unit": "px",
       "default": 0
+    },
+    {
+      "type": "header",
+      "content": "t:content.image_display"
+    },
+    {
+      "type": "select",
+      "id": "image_fit",
+      "label": "t:settings.image_fit",
+      "options": [
+        {
+          "value": "cover",
+          "label": "t:options.cover"
+        },
+        {
+          "value": "contain",
+          "label": "t:options.contain"
+        }
+      ],
+      "default": "cover",
+      "info": "t:info.image_fit_description"
     }
   ],
   "presets": [
